@@ -1,0 +1,14 @@
+
+***** FACTURA *****
+ID del servicio: 1111
+ID de la mascota: 5678
+Nombre de la mascota: homero
+Tipo de mascota: koala
+Edad de la mascota: 2
+Nombre del propietario: mauricio
+Numero de servicio: 1111
+Peluqueada: $40
+Numero de servicio: 2222
+Desparasitacion: $10
+Total: $50
+
