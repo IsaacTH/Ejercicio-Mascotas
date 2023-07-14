@@ -22,7 +22,6 @@ void datosMascota(char (*Mascota)[10]) {
 void servicios(int (*Servicio)[20]) {
     int opcion3, contador = 0;
 
-    servicios:
     printf("Elija el ID de los servicios que desea para su mascota:\n");
     printf("ID: 1111 Peluqueada $10 (servicio de corte de pelo con limpieza)\n");
     printf("ID: 2222 Desparasitacion $40 (servicio que garantiza la salud gastrointestinal)\n");
@@ -84,12 +83,16 @@ void mascotaFactura(int Servicio[3][20], char Mascota[5][10]) {
     }
 
     if (encontrado) {
-        printf("\n***** FACTURA *****\n");
-        printf("ID de la mascota: %s\n", *(Mascota + i));
-        printf("Nombre de la mascota: %s\n", *(Mascota + i + 1));
-        printf("Tipo de mascota: %s\n", *(Mascota + i + 2));
-        printf("Edad de la mascota: %s\n", *(Mascota + i + 3));
-        printf("Nombre del propietario: %s\n", *(Mascota + i + 4));
+
+        FILE *f;
+        f = fopen("mascotaFactura.txt", "w");
+
+        fprintf(f, "\n***** FACTURA *****\n");
+        fprintf(f, "ID de la mascota: %s\n", *(Mascota + i));
+        fprintf(f, "Nombre de la mascota: %s\n", *(Mascota + i + 1));
+        fprintf(f, "Tipo de mascota: %s\n", *(Mascota + i + 2));
+        fprintf(f, "Edad de la mascota: %s\n", *(Mascota + i + 3));
+        fprintf(f, "Nombre del propietario: %s\n", *(Mascota + i + 4));
 
         int *pServicio = Servicio[0];
         int *pPrecio = Servicio[1];
@@ -99,20 +102,21 @@ void mascotaFactura(int Servicio[3][20], char Mascota[5][10]) {
                 int servicioID = *pServicio;
                 int servicioPrecio = *pPrecio;
 
-                printf("Numero de servicio: %d\n", servicioID);
+                fprintf(f, "Numero de servicio: %d\n", servicioID);
                 if (servicioID == 1111) {
-                    printf("Peluqueada: $%d\n", servicioPrecio);
+                    fprintf(f, "Peluqueada: $%d\n", servicioPrecio);
                 } else if (servicioID == 2222) {
-                    printf("Desparasitacion: $%d\n", servicioPrecio);
+                    fprintf(f, "Desparasitacion: $%d\n", servicioPrecio);
                 } else if (servicioID == 3333) {
-                    printf("Adiestramiento: $%d\n", servicioPrecio);
+                    fprintf(f, "Adiestramiento: $%d\n", servicioPrecio);
                 }
                 totalPrecios += servicioPrecio;
             }
             pServicio++;
             pPrecio++;
         }
-        printf("Total: $%d\n\n", totalPrecios);
+        fprintf(f, "Total: $%d\n\n", totalPrecios);
+        fclose(f);
     }
 }
 
